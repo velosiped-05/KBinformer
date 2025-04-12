@@ -3,18 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Мое приложение</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <title>Мое веб-приложение</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /* Добавлен базовый шрифт для лучшего вида */
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 600px) {
+            body {
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
-<script src="https://telegram.org/js/telegram-web-app.js"></script>
-<script>
-    window.Telegram.WebApp.ready();
-    const user = window.Telegram.WebApp.initDataUnsafe.user;
-    if (user) {
-        alert(`Привет, ${user.first_name}!`);
-    }
-</script>
 <body>
     <h1>Добро пожаловать!</h1>
+    <p>Это статичная страница для Telegram.</p>
+    <a href="about.html">О нас</a>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        window.Telegram.WebApp.ready();
+        const user = window.Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+            alert(`Привет, ${user.first_name}!`);
+        }
+    </script>
 </body>
 </html>
