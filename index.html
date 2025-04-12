@@ -38,6 +38,10 @@
                 <div class='file-content'><b>10315</b> ул.Бушуева 5 Ухта<br><b>13769</b> кв-л Южный 22 Троицко-Печорск<br><b>13794</b> ул.Строительная 20А Печора<br><b>14579</b> пр.Гражданский 118 к.1 л.А п.28Н Санкт-Петербург<br><b>15199</b> пр-т Кондратьевский 23/20 Санкт-Петербург<br><b>15421</b> ул.Ломоносова 18 Воркута<br><b>16384</b> ул.Железнодорожная 26 Кузьмоловский<br><b>19860</b> Мира 45 Инта<br><b>20373</b> пр-кт Печорский 35 Печора<br><b>22912</b> пр-т Б.Сампсониевский 69 Санкт-Петербург<br><b>6422</b> пр.Большеохтинский 13/4 А кор.1 пом 1Н Санкт-Петербург<br><b>6588</b> пр-кт Октябрьский 148 пом.Н-3 Сыктывкар<br><b>7952</b> пр.Среднеохтинский 47/9 литА пом1-Н Санкт-Петербург<br><b>8330</b> пр.Богатырский 56/1 пом.15-Н Санкт-Петербург<br><b>8405</b> пр.Комендантский 69 стр.1 п.29Н Санкт-Петербург<br><b>8478</b> ул.Молодежная 14 Нижний Одесс<br><b>9469</b> пр.Марш.Блюхера 7 к.3 с.1 п.17Н Санкт-Петербург</div>
             </div>
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>window.Telegram.WebApp.ready();const user=window.Telegram.WebApp.initDataUnsafe.user;user&&(document.getElementById("greeting").textContent=`Привет, ${user.first_name}! Это тестовая страница `);</script>
+    <script>
+        window.Telegram.WebApp.ready();
+        const user = window.Telegram.WebApp.initDataUnsafe.user;
+        user && (document.getElementById("greeting").textContent = `Привет, ${user.first_name}! Это тестовая страница для Telegram.`);
+    </script>
 </body>
 </html>
