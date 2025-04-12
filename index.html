@@ -6,12 +6,14 @@
     <title>Мое веб-приложение</title>
     <style>
         body {
-            font-family: Arial, sans-serif; /* Добавлен базовый шрифт для лучшего вида */
+            font-family: Arial, sans-serif;
             margin: 20px;
             text-align: center;
+            background: white; /* Белый фон */
+            color: black; /* Чёрный текст */
         }
         h1 {
-            color: #333;
+            color: black; /* Чёрный цвет для заголовка */
         }
         a {
             color: #007bff;
@@ -29,7 +31,7 @@
 </head>
 <body>
     <h1>Добро пожаловать!</h1>
-    <p>Это статичная страница для Telegram.</p>
+    <p id="greeting">Это статичная страница для Telegram.</p>
     <a href="about.html">О нас</a>
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -37,7 +39,7 @@
         window.Telegram.WebApp.ready();
         const user = window.Telegram.WebApp.initDataUnsafe.user;
         if (user) {
-            alert(`Привет, ${user.first_name}!`);
+            document.getElementById('greeting').textContent = `Привет, ${user.first_name}! Это статичная страница для Telegram.`;
         }
     </script>
 </body>
