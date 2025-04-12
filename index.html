@@ -2,45 +2,20 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Мое веб-приложение</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            text-align: center;
-            background: white; /* Белый фон */
-            color: black; /* Чёрный текст */
-        }
-        h1 {
-            color: black; /* Чёрный цвет для заголовка */
-        }
-        a {
-            color: #007bff;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 600px) {
-            body {
-                font-size: 16px;
-            }
-        }
-    </style>
+    <style>body{font-family:Arial,sans-serif;margin:20px;text-align:center;background:#fff;color:#000}h1,a{color:#000}a{text-decoration:none}a:hover{text-decoration:underline}@media(max-width:600px){body{font-size:16px}}</style>
 </head>
 <body>
-    <h1>Добро пожаловать!</h1>
-    <p id="greeting">Это статичная страница для Telegram.</p>
-    <a href="about.html">О нас</a>
-
+    <h1>андер констракшен</h1>
+    <p id="greeting"></p>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         window.Telegram.WebApp.ready();
         const user = window.Telegram.WebApp.initDataUnsafe.user;
         if (user) {
-            document.getElementById('greeting').textContent = `Привет, ${user.first_name}! Это статичная страница для Telegram.`;
+            document.getElementById('greeting').textContent = `Привет, ${user.first_name}! Это тестовая страничка`;
         }
-    </script>
+    </script>    
 </body>
 </html>
