@@ -1,60 +1,49 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Разделенная страница</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-		.file-container { margin-bottom: 20px; }
-        .file-title { color: #333; }
-        .file-content { background-color: #f5f5f5; padding: 10px; border: 1px solid #ddd; line-height: 1.5; }
-        #menu {
-            background-color: #f0f0f0;
-            padding: 10px;
-            border-bottom: 1px solid #ccc;
-            position: fixed;
-            width: 100%;
-            top: 0;
-        }
-        #menu button {
-            margin: 0 10px;
-            padding: 5px 10px;
-            cursor: pointer;
-        }
-        #content {
-            margin-top: 50px;
-            height: calc(100vh - 50px);
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        body{font-family:Arial,sans-serif;margin:20px;text-align:center;background:#fff;color:#000}
+        h1{color:#333}
+        a{color:#007bff;text-decoration:none}
+        a:hover{text-decoration:underline}
+        #menu{background:#f0f0f0;padding:10px;border-bottom:1px solid #ccc;position:fixed;width:100%;top:0}
+        #menu button,#menu span{margin:0 10px;padding:5px 10px;cursor:pointer}
+        #content{margin-top:50px}
+        .file-container{margin-bottom:20px}
+        .file-title{font-weight:bold;color:#333}
+        .file-content{background:#f5f5f5;padding:10px;border:1px solid #ddd;line-height:1.5}
+        @media(max-width:600px){body{font-size:16px}}
     </style>
 </head>
 <body>
     <div id="menu">
+        <span id="greeting">Гость</span>
         <button onclick="loadPage('247005670.html')">Попов</button>
         <button onclick="loadPage('lebedev.html')">Лебедев</button>
         <button onclick="loadPage('baranov.html')">Баранов</button>
         <button onclick="loadPage('baburin.html')">Бабурин</button>
     </div>
-    <div id="content">
-        <iframe id="contentFrame" src="247005670.html"></iframe>
-    </div>
-
+    <div id="content"></div>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
-        let currentPage = '247005670.html'; // Текущая страница по умолчанию
-
+        let currentPage = '247005670.html';
         function loadPage(page) {
             currentPage = page;
-            document.getElementById('contentFrame').src = page;
+            fetch(page)
+                .then(response => response.text())
+                .then(data => document.getElementById('content').innerHTML = data)
+                .catch(() => document.getElementById('content').innerHTML = 'Ошибка загрузки');
         }
-
-        // Автоматическое обновление каждые 5 минут (300000 миллисекунд)
-        setInterval(function() {
-            document.getElementById('contentFrame').src = currentPage;
-        }, 300000);
+        window.Telegram.WebApp.ready();
+        const user = window.Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+            document.getElementById('greeting').textContent = `Привет, ${user.first_name}!`;
+        }
+        loadPage(currentPage);
+        setInterval(() => loadPage(currentPage), 300000);
     </script>
 </body>
 </html>
