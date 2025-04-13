@@ -5,17 +5,22 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Разделенная страница</title>
     <style>
-        body{font-family:Arial,sans-serif;margin:20px;text-align:left;background:#fff;color:#000}
+        body{font-family:Arial,sans-serif;margin:20px;text-align:center;background:#fff;color:#000}
         h1{color:#333}
         a{color:#007bff;text-decoration:none}
         a:hover{text-decoration:underline}
-        #menu{background:#f0f0f0;padding:10px;border-bottom:1px solid #ccc;position:fixed;width:100%;top:0}
-        #menu button,#menu span{margin:0 10px;padding:5px 10px;cursor:pointer}
-        #content{margin-top:50px}
+        #menu{background:#f0f0f0;padding:10px;border-bottom:1px solid #ccc;position:fixed;width:100%;top:0;box-sizing:border-box}
+        #menu button,#menu span{margin:0 5px;padding:5px 8px;cursor:pointer;font-size:16px}
+        #content{margin-top:60px}
         .file-container{margin-bottom:20px}
         .file-title{font-weight:bold;color:#333}
         .file-content{background:#f5f5f5;padding:10px;border:1px solid #ddd;line-height:1.5}
-        @media(max-width:600px){body{font-size:16px}}
+        @media(max-width:600px){
+            body{font-size:16px}
+            #menu{padding:5px}
+            #menu button,#menu span{font-size:14px;padding:3px 5px;margin:2px}
+            #content{margin-top:50px}
+        }
     </style>
 </head>
 <body>
@@ -30,15 +35,16 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let currentPage = '247005670.html';
-        function loadPage(page) {
+        async function loadPage(page) {
             currentPage = page;
-            fetch(page, {cache: 'no-store'})
-                .then(response => {
-                    if (!response.ok) throw new Error('File not found');
-                    return response.text();
-                })
-                .then(data => document.getElementById('content').innerHTML = data)
-                .catch(err => document.getElementById('content').innerHTML = `Ошибка загрузки: ${err.message}`);
+            try {
+                const response = await fetch(`./${page}`, {cache: 'no-store'});
+                if (!response.ok) throw new Error('File not found: ' + page);
+                const data = await response.text();
+                document.getElementById('content').innerHTML = data;
+            } catch (err) {
+                document.getElementById('content').innerHTML = `Ошибка загрузки: ${err.message}`;
+            }
         }
         window.Telegram.WebApp.ready();
         const user = window.Telegram.WebApp.initDataUnsafe.user;
