@@ -32,10 +32,13 @@
         let currentPage = '247005670.html';
         function loadPage(page) {
             currentPage = page;
-            fetch(page)
-                .then(response => response.text())
+            fetch(page, {cache: 'no-store'})
+                .then(response => {
+                    if (!response.ok) throw new Error('File not found');
+                    return response.text();
+                })
                 .then(data => document.getElementById('content').innerHTML = data)
-                .catch(() => document.getElementById('content').innerHTML = 'Ошибка загрузки');
+                .catch(err => document.getElementById('content').innerHTML = `Ошибка загрузки: ${err.message}`);
         }
         window.Telegram.WebApp.ready();
         const user = window.Telegram.WebApp.initDataUnsafe.user;
